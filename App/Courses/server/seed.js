@@ -2,26 +2,45 @@ const chance = new Chance('courses');
 
 chance.mixin({
 	course() {
-		let title = chance.capitalize(chance.word());
-		let description = chance.sentence();
-		let maxStudents = _.random(20);
+		return {
+			title: chance.capitalize(chance.word()), 
+			description: chance.sentence(), 
+			maxStudents: _.random(20)
+		}
+	},
+	'class'(id) {
+		let courseIds = Courses.find().fetch().map(course => course._id);
+		let courseId = id || chance.pick(courseIds);
 
 		return {
-			title, description, maxStudents
+			title: chance.capitalize(chance.word()),
+			description: chance.sentence(),
+			duration: _.random(12),
+			price: _.random(3000),
+			courseId
 		}
 	}
 });
 
-const create = function(count = 5) {
+// take the number of courses and classes
+// and creates random seed data
+const create = function(
+	count = 5, 
+	classes = 5) {
 	_.times(count, () => {
 		let course = new Course(chance.course());
 		course.save();
+		_.times(classes, () => {
+			let c = new Class(chance.class(course._id));
+			c.save();
+		});
 	});
-}
+};
 
 const reset = () => {
+	Classes.remove({});
 	Courses.remove({});
-}
+};
 
 
 Meteor.startup(function() {

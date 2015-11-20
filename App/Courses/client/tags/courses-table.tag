@@ -16,7 +16,7 @@
 				<td>{title}</td>
 				<td>{description}</td>
 				<td>{maxStudents}</td>
-				<td>{numberOfClasses()}</td>
+				<td>{classes().count()}</td>
 				<td>{duration()} hrs</td>
 				<td>R {price()}</td>
 				<td>
