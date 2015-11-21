@@ -1,0 +1,47 @@
+booking-form
+	.ui.form
+		.field
+
+			.ui.segment
+				.ui.header
+					h2 Course
+				p {opts.booking.course().title}
+				.ui.input: select.ui.fluid.dropdown
+					option(value='') Course
+					option(each='{data.courses}' value='{_id}') {title}
+
+		.field
+			.ui.segment
+				.ui.header
+					h2 Learners Booked
+				p(each='{opts.booking.learners().fetch()}')
+					| {name}
+				.ui.header Select Client
+					select.ui.fluid.dropdown
+						option(value='') Client
+						option(each='{data.clients}' value='{_id}') {name}
+				.ui.header Select Learners
+					ul: li(each='{data.learners}') {name} : {client().name}
+		.field
+			.ui.segment
+				.ui.header
+					h2 Sessions
+				.ui.segment(each='{opts.booking.sessions}')
+					p {moment(date).calendar()}
+					p Facilitator: {facilitator().name}
+					p Class: {class().title}
+				.ui.header Select Sessions
+					ul: li(each='{data.classes}') {title}
+				
+	script(type='coffee').
+		@on 'mount', ->
+			unless @opts.booking
+				@opts.booking = new Facilitator()
+
+		@getMeteorData = ->
+			courses: Courses.find().fetch()
+			clients: Clients.find().fetch()
+			learners: Learners.find().fetch()
+			classes: Classes.find().fetch()
+
+		@mixin 'RiotMeteorData'
