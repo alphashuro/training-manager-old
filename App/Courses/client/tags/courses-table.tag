@@ -27,15 +27,10 @@
 		</tbody>
 	</table>
 
-	<script>
-	'use strict';
+	<script type='coffee'>	
+		@getMeteorData = ->
+			courses: Courses.find().fetch()
 
-	getMeteorData() {
-		return {
-			courses: Courses.find({}).fetch()
-		}
-	}
-	this.mixin('RiotMeteorData');
-
+		@mixin('RiotMeteorData');
 	</script>
 </courses-table>

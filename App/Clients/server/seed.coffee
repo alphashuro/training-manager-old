@@ -27,8 +27,8 @@ create = (clients = 5, learners = 5) ->
 			learner.save()
 
 reset = ->
-	Learners.remove()
-	Clients.remove()
+	Learners.remove({})
+	Clients.remove({})
 
 Meteor.startup ->
 	reset()

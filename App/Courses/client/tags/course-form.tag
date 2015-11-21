@@ -29,10 +29,9 @@
 				
 	</form>
 
-	<script>
-		this.on('mount', () => {
-			if(!this.opts.course)
-				this.opts.course = new Course();
-		});
+	<script type='coffee'>
+		@on 'mount', ->
+			unless @opts.course
+				@opts.course = new Course();
 	</script>
 </course-form>

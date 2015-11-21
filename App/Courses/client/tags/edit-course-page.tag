@@ -5,13 +5,9 @@
 	<br>
 	<classes-table course="{data.course}"></classes-table>
 
-	<script>
-	'use strict';
-	getMeteorData() {
-		return {
-			course: Courses.findOne(this.opts.course_id)
-		}
-	}
-	this.mixin('RiotMeteorData');
+	<script type='coffee'>
+		@getMeteorData = ->
+			course: Courses.findOne @opts.course_id
+		@mixin 'RiotMeteorData'
 	</script>
 </edit-course-page>

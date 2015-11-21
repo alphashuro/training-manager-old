@@ -47,13 +47,10 @@
 		</tbody>
 	</table>
 
-	<script>
-	'use strict';
-	getMeteorData() {
-		return {
+	<script type='coffee'>
+		@getMeteorData = ->
 			classes: this.opts.course.classes().fetch()
-		}
-	}
-	this.mixin('RiotMeteorData');
+
+		@mixin 'RiotMeteorData'
 	</script>
 </classes-table>
