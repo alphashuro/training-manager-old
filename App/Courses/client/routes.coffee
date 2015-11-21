@@ -11,4 +11,4 @@ FlowRouter.route '/courses/add',
 FlowRouter.route '/courses/:_id',
 	action: (params) ->
 		RiotLayout.render 'layout',
-			main: """<edit-course-page course_id="#{params._id}"></edit-course-page>"""
+			main: "<edit-course-page course_id=#{params._id}></edit-course-page>"
