@@ -7,13 +7,9 @@ chance.mixin
 			phone: chance.phone()
 		}
 
-create = (count = 5) ->
+@createFacilitators = (count = 5) ->
 	_.times count, ->
 		facilitator = new Facilitator chance.facilitator()
 		facilitator.save()
 
-reset = -> Facilitators.remove()
-
-Meteor.startup ->
-	reset()
-	create()
+@resetFacilitators = -> Facilitators.remove({})

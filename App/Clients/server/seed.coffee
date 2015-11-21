@@ -18,7 +18,7 @@ chance.mixin
 			clientId
 		}
 
-create = (clients = 5, learners = 5) ->
+@createClients = (clients = 5, learners = 5) ->
 	_.times clients, ->
 		client = new Client chance.client()
 		client.save()
@@ -26,10 +26,6 @@ create = (clients = 5, learners = 5) ->
 			learner = new Learner chance.learner client._id
 			learner.save()
 
-reset = ->
+@resetClients = ->
 	Learners.remove({})
 	Clients.remove({})
-
-Meteor.startup ->
-	reset()
-	create()

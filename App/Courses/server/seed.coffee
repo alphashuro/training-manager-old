@@ -19,7 +19,7 @@ chance.mixin
 
 # take the number of courses and classes
 # and creates random seed data
-create = (count = 5, classes = 5) ->
+@createCourses = (count = 5, classes = 5) ->
 	_.times count, -> 
 		course = new Course chance.course()
 		course.save()
@@ -27,10 +27,6 @@ create = (count = 5, classes = 5) ->
 			c = new Class chance.class course._id
 			c.save()
 
-reset = -> 
+@resetCourses = -> 
 	Classes.remove({})
 	Courses.remove({})
-
-Meteor.startup ->
-	reset()
-	create()
