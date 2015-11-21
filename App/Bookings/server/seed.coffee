@@ -17,11 +17,11 @@ chance.mixin
 		facilitator = chance.pick facilitators
 		facilitatorId = facilitator._id
 
-		sessions = classes.map (c) ->
+		sessions = classes.map (c) =>
 			new SessionClass
 				date: chance.date year: 2015, month: 10
 				classId: c._id
-				facilitatorId
+				facilitatorId: facilitatorId
 
 		{
 			learnerIds
