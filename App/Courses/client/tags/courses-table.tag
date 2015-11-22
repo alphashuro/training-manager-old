@@ -21,7 +21,7 @@
 				<td>R {price()}</td>
 				<td>
 					<a href="/courses/{_id}" class="ui primary button">Details</a>
-					<button class="ui button">Delete</button>
+					<button class="ui button" onclick='{parent.delete}'>Delete</button>
 				</td>
 			</tr>
 		</tbody>
@@ -31,6 +31,8 @@
 		@getMeteorData = ->
 			courses: Courses.find().fetch()
 
-		@mixin('RiotMeteorData');
+		@mixin('RiotMeteorData')
+
+		@delete = (e) -> e.item.remove()
 	</script>
 </courses-table>
