@@ -18,17 +18,17 @@ booking-form
 					| {name} ({client().name})
 					button.ui.button(onclick='{parent.removeLearner}') Remove
 				.ui.header Select Client
-					select.ui.fluid.dropdown(name='clientId' onchange='{changed}')
-						option(value='') Client
-						option(each='{data.clients}' value='{_id}' selected='{_id == clientId.value}') {name}
+				select.ui.fluid.dropdown(name='clientId' onchange='{changed}')
+					option(value='') Client
+					option(each='{data.clients}' value='{_id}' selected='{_id == clientId.value}') {name}
 				.ui.header Select Learners
-					ul: li(each='{data.learners}')
-						.ui.checkbox
-							input(
-								type="checkbox" 
-								checked='{ parent.opts.booking.learnerIds.includes(_id) }' 
-								onchange='{ parent.learnerToggled }')
-							label {name}
+				ul: li(each='{data.learners}')
+					.ui.checkbox
+						input(
+							type="checkbox" 
+							checked='{ parent.opts.booking.learnerIds.includes(_id) }' 
+							onchange='{ parent.learnerToggled }')
+						label {name}
 
 		.field
 			.ui.segment
@@ -36,37 +36,56 @@ booking-form
 					h2 Sessions
 				.ui.segment(each='{opts.booking.sessions}')
 					p {moment(date).calendar()}
+						input(type='datetime-local' value="{moment(date).format('YYYY-MM-DD[T]HH:mm')}")
 					p Facilitator: {facilitator().name}
+						select.ui.fluid.dropdown(onchange='{ parent.sessionFacilitatorChanged }')
+							option(value='') Facilitator
+							option(each='{parent.data.facilitators}' value='{_id}' selected='{_id == parent.facilitatorId }') {name}
 					p Class: {class().title}
 				.ui.header Select Sessions
-					ul: li(each='{data.classes}') {title}
+				select.ui.fluid.dropdown(name='facilitatorId' onchange='{changed}')
+					option(value='') Facilitator
+					option(each='{data.facilitators}' value='{_id}' selected='{_id == facilitatorId.value}') {name}
+				ul: li(each='{opts.booking.sessions}')
+					p {class().title}
+					p {moment(date).calendar()}
+					p {facilitator().name}
 
 		button.ui.button Save
 				
 	script(type='coffee').
 		@on 'mount', ->
 			unless @opts.booking
-				@opts.booking = new Facilitator()
+				@opts.booking = new Booking()
 
 		@getMeteorData = ->
 			courses: Courses.find().fetch()
 			clients: Clients.find().fetch()
 			learners: Learners.find({clientId: @clientId.value}).fetch()
-			classes: Classes.find({courseId: @courseId.value}).fetch()
+			facilitators: Facilitators.find().fetch()
+			sessions: Classes.find({courseId: @courseId.value}).fetch().map (c) -> 
+				new SessionClass
+					classId: c._id
 
 		@mixin 'RiotMeteorData'
 
 		@save = (e) ->
 			e.preventDefault()
 
-			@opts.booking.set
-				courseId: @courseId.value
-
 			@opts.booking.save (error) ->
 				if error then console.log error
 				else console.log 'Booking saved'
 	
 		@changed = (e) ->
+			switch e.target.name
+
+				when 'courseId'
+					@opts.booking.set 
+						sessions: @data.sessions
+						courseId: e.target.value
+
+				when 'facilitatorId'
+					@opts.booking.sessions.forEach (session) => session.set facilitatorId: e.target.value
 
 		@learnerToggled = (e) =>
 			learner = e.item
@@ -78,3 +97,8 @@ booking-form
 		@removeLearner = (e) =>
 			learner = e.item
 			@opts.booking.pull 'learnerIds', learner._id 
+
+		@sessionFacilitatorChanged = (e) =>
+			session = e.item
+			facilitatorId = e.target.value
+			session.set { facilitatorId }
