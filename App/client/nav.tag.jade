@@ -8,10 +8,10 @@ nav-menu
 		a.item(href="/bookings") Bookings
 
 		.ui.simple.dropdown.right.item
-			| Hi {data.user.profile.name || data.user.emails[0].address}  
-			spam
+			span
 				|  
-				i.plug.icon(class='{ green : data.connected}')
+				i.circle.icon(class='{ green : data.connected}')
+			| Hi {data.user.profile.name || data.user.emails[0].address}  
 			i.dropdown.icon
 			.menu
 				a.item(href='/profile') Profile
