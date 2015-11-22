@@ -1,27 +1,35 @@
 booking-form
-	.ui.form
+	form.ui.form(onsubmit='{save}')
+		
 		.field
-
 			.ui.segment
 				.ui.header
 					h2 Course
 				p {opts.booking.course().title}
-				.ui.input: select.ui.fluid.dropdown
+				.ui.input: select.ui.fluid.dropdown(name='courseId' onchange='{changed}' value='{opts.booking.courseId}')
 					option(value='') Course
-					option(each='{data.courses}' value='{_id}') {title}
+					option(each='{data.courses}' value='{_id}' selected='{_id == courseId.value}') {title}
 
 		.field
 			.ui.segment
 				.ui.header
-					h2 Learners Booked
+					h2 Learners Booked ({opts.booking.learners().count()})
 				p(each='{opts.booking.learners().fetch()}')
-					| {name}
+					| {name} ({client().name})
+					button.ui.button(onclick='{parent.removeLearner}') Remove
 				.ui.header Select Client
-					select.ui.fluid.dropdown
+					select.ui.fluid.dropdown(name='clientId' onchange='{changed}')
 						option(value='') Client
-						option(each='{data.clients}' value='{_id}') {name}
+						option(each='{data.clients}' value='{_id}' selected='{_id == clientId.value}') {name}
 				.ui.header Select Learners
-					ul: li(each='{data.learners}') {name} : {client().name}
+					ul: li(each='{data.learners}')
+						.ui.checkbox
+							input(
+								type="checkbox" 
+								checked='{ parent.opts.booking.learnerIds.includes(_id) }' 
+								onchange='{ parent.learnerToggled }')
+							label {name}
+
 		.field
 			.ui.segment
 				.ui.header
@@ -32,6 +40,8 @@ booking-form
 					p Class: {class().title}
 				.ui.header Select Sessions
 					ul: li(each='{data.classes}') {title}
+
+		button.ui.button Save
 				
 	script(type='coffee').
 		@on 'mount', ->
@@ -41,7 +51,30 @@ booking-form
 		@getMeteorData = ->
 			courses: Courses.find().fetch()
 			clients: Clients.find().fetch()
-			learners: Learners.find().fetch()
-			classes: Classes.find().fetch()
+			learners: Learners.find({clientId: @clientId.value}).fetch()
+			classes: Classes.find({courseId: @courseId.value}).fetch()
 
 		@mixin 'RiotMeteorData'
+
+		@save = (e) ->
+			e.preventDefault()
+
+			@opts.booking.set
+				courseId: @courseId.value
+
+			@opts.booking.save (error) ->
+				if error then console.log error
+				else console.log 'Booking saved'
+	
+		@changed = (e) ->
+
+		@learnerToggled = (e) =>
+			learner = e.item
+			if @opts.booking.learnerIds.includes learner._id
+				@opts.booking.pull 'learnerIds', learner._id
+			else
+				@opts.booking.push 'learnerIds', learner._id
+
+		@removeLearner = (e) =>
+			learner = e.item
+			@opts.booking.pull 'learnerIds', learner._id 
