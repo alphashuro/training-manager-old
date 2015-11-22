@@ -1,5 +1,5 @@
 <client-form>
-	<form class="ui form">
+	<form class="ui form" onsubmit="{save}">
 		<div class="field">
 						<label>Name</label>
 						<input type="text" name='name' placeholder='Name' value={opts.client.name} />
@@ -25,8 +25,21 @@
 
 	<script type="coffee">
 		@on 'mount', ->
-			console.log @opts
 			unless @opts.client
-				@opts.client = new Client();
+				@opts.client = new Client()
+
+		@save = (e) ->
+			e.preventDefault()
+
+			@opts.client.set
+				name: @name.value
+				address: @address.value
+				contact: @contact.value
+				email: @email.value
+				phone: @phone.value
+
+			@opts.client.save (error) ->
+				if error then console.log error
+				else console.log 'Client saved'
 	</script>
 </client-form>
