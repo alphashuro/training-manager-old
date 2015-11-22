@@ -1,4 +1,5 @@
 @Facilitators = new Mongo.Collection 'facilitators'
+Ground.Collection Facilitators
 
 @Facilitator = Astro.Class
 	name: 'Facilitator'

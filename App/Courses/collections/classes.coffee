@@ -1,4 +1,5 @@
 @Classes = new Mongo.Collection 'classes'
+Ground.Collection Classes
 
 @Class = Astro.Class
 	name: 'Class'

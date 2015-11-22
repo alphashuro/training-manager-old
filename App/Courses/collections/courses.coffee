@@ -1,4 +1,5 @@
 @Courses = new Mongo.Collection 'courses'
+Ground.Collection Courses
 
 @Course = Astro.Class
 	name: 'Course'

@@ -1,4 +1,5 @@
 @Bookings = new Mongo.Collection 'bookings'
+Ground.Collection Bookings
 
 @SessionClass = Astro.Class
 	name: "SessionClass"

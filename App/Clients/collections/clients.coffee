@@ -1,4 +1,5 @@
 @Clients = new Mongo.Collection 'clients'
+Ground.Collection Clients
 
 @Client = Astro.Class
 	name: 'Client'
