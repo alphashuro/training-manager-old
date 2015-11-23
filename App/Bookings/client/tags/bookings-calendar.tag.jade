@@ -32,10 +32,6 @@ bookings-calendar
 					sessions = booking.sessions
 					session = _.findWhere sessions, { classId }
 
-
-		@on 'updated', ->
-			console.log this.calendar
-			# $('#calendar').fullCalendar 'refetchEvents'					# something is adding an extra 2 hours to event.start
 					session.set 'date', event.start.toDate()
 					booking.save (error) =>
 						if (error) console.log error
