@@ -2,54 +2,64 @@ booking-form
 	form.ui.form(onsubmit='{save}')
 		
 		.field
-			.ui.segment
-				.ui.header
-					h2 Course
-				p {opts.booking.course().title}
-				.ui.input: select.ui.fluid.dropdown(name='courseId' onchange='{changed}' value='{opts.booking.courseId}')
-					option(value='') Course
-					option(each='{data.courses}' value='{_id}' selected='{_id == courseId.value}') {title}
+			.ui.segment.grid
+				.ui.eight.wide.column
+					.ui.header
+						h2 Course
+					p {opts.booking.course().title}
+				.ui.eight.wide.column
+					.ui.input: select.ui.fluid.dropdown(name='courseId' onchange='{changed}' value='{opts.booking.courseId}')
+						option(value='') Course
+						option(each='{data.courses}' value='{_id}' selected='{_id == courseId.value}') {title}
 
 		.field
-			.ui.segment
-				.ui.header
-					h2 Learners Booked ({opts.booking.learners().count()} / {opts.booking.course().maxStudents})
-				p(each='{opts.booking.learners().fetch()}')
-					| {name} ({client().name})
-					button.ui.button(onclick='{parent.removeLearner}') Remove
-				.ui.header Select Client
-				select.ui.fluid.dropdown(name='clientId' onchange='{changed}')
-					option(value='') Client
-					option(each='{data.clients}' value='{_id}' selected='{_id == clientId.value}') {name}
-				.ui.header Select Learners
-				ul: li(each='{data.learners}')
-					.ui.checkbox
-						input(
-							type="checkbox" 
-							checked='{ parent.opts.booking.learnerIds.includes(_id) }' 
-							onchange='{ parent.learnerToggled }')
-						label {name}
+			.ui.segment.grid
+				.ui.eight.wide.column
+					.ui.header
+						h2 Learners Booked ({opts.booking.learners().count()} / {opts.booking.course().maxStudents})
+					.ui.middle.aligned.divided.list
+						.item(each='{opts.booking.learners().fetch()}')
+							.right.floated.content: button.ui.button(onclick='{parent.removeLearner}') Remove
+							.content {name} ({client().name})
+				.ui.eight.wide.column
+					.ui.header Select Client
+					select.ui.fluid.dropdown(name='clientId' onchange='{changed}')
+						option(value='') Client
+						option(each='{data.clients}' value='{_id}' selected='{_id == clientId.value}') {name}
+					.ui.header Select Learners
+					ul: li(each='{data.learners}')
+						.ui.checkbox
+							input(
+								type="checkbox" 
+								checked='{ parent.opts.booking.learnerIds.includes(_id) }' 
+								onchange='{ parent.learnerToggled }')
+							label {name}
 
 		.field
-			.ui.segment
-				.ui.header
-					h2 Sessions
-				.ui.segment(each='{opts.booking.sessions}')
-					p {moment(date).calendar()}
-						input(type='datetime-local' value="{moment(date).format('YYYY-MM-DD[T]HH:mm')}")
-					p Facilitator: {facilitator().name}
-						select.ui.fluid.dropdown(onchange='{ parent.sessionFacilitatorChanged }')
-							option(value='') Facilitator
-							option(each='{parent.data.facilitators}' value='{_id}' selected='{_id == parent.facilitatorId }') {name}
-					p Class: {class().title}
-				.ui.header Select Sessions
-				select.ui.fluid.dropdown(name='facilitatorId' onchange='{changed}')
-					option(value='') Facilitator
-					option(each='{data.facilitators}' value='{_id}' selected='{_id == facilitatorId.value}') {name}
-				ul: li(each='{opts.booking.sessions}')
-					p {class().title}
-					p {moment(date).calendar()}
-					p {facilitator().name}
+			.ui.segment.grid
+				.ui.eight.wide.column
+					.ui.header
+						h2 Sessions
+						p Total hours : { opts.booking.hours() }
+						p Total price : R { opts.booking.price() }
+					.ui.segment(each='{opts.booking.sessions}')
+						p {moment(date).calendar()}
+							input(type='datetime-local' value="{moment(date).format('YYYY-MM-DD[T]HH:mm')}")
+						p Facilitator: {facilitator().name}
+							select.ui.fluid.dropdown(onchange='{ parent.sessionFacilitatorChanged }')
+								option(value='') Facilitator
+								option(each='{parent.data.facilitators}' value='{_id}' selected='{_id == parent.facilitatorId }') {name}
+						p Class: {class().title}
+				.ui.eight.wide.column
+					.ui.header Select Sessions
+					select.ui.fluid.dropdown(name='facilitatorId' onchange='{changed}')
+						option(value='') Assign a facilitator to all sessions
+						option(each='{data.facilitators}' value='{_id}' selected='{_id == facilitatorId.value}') {name}
+					ul: li(each='{data.sessions}')
+						p {class().title}
+						p {class().description}
+						p {class().duration} hrs
+						p R {class().price}
 
 		button.ui.button Save
 				
