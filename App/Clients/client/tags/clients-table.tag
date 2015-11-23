@@ -21,7 +21,7 @@
 				<td>{learners().count()}</td>
 				<td>
 					<a href="/clients/{_id}" class="ui primary button">Details</a>
-					<button class="ui button">Delete</button>
+					<button class="ui button" onclick='{ parent.delete }'>Delete</button>
 				</td>
 			</tr>
 		</tbody>
@@ -32,5 +32,7 @@
 			clients: Clients.find().fetch()
 
 		@mixin 'RiotMeteorData'
+
+		@delete = (e) -> e.item.remove()
 	</script>
 </clients-table>

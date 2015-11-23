@@ -13,10 +13,12 @@ bookings-table
 				td {sessions.length}
 				td
 					a.ui.primary.button(href="/bookings/{_id}") Details
-					button.ui.button Delete
+					button.ui.button(onclick='{parent.delete}') Delete
 
 	script(type='coffee').
 		@getMeteorData = ->
 			bookings: Bookings.find().fetch()
 
 		@mixin 'RiotMeteorData'
+
+		@delete = (e) -> e.item.remove()

@@ -45,7 +45,7 @@
 				<td>{phone}</td>
 				<td>{email}</td>
 				<td>
-					<button class="ui button">Delete</button>
+					<button class="ui button" onclick='{parent.delete}'>Delete</button>
 				</td>
 			</tr>
 		</tbody>
@@ -56,5 +56,7 @@
 			learners: this.opts.client?.learners().fetch()
 
 		@mixin 'RiotMeteorData'
+
+		@delete = (e) -> e.item.remove()
 	</script>
 </learners-table>
