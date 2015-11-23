@@ -33,3 +33,14 @@ Ground.Collection Bookings
 		course: -> Courses.findOne @courseId
 		hours: -> @sessions.reduce ((memo, session) -> memo + session.class().duration), 0
 		price: -> @sessions.reduce ((memo, session) -> memo + session.class().price), 0
+		events: -> @sessions.map (s) =>
+			#the id is bookingId/classId
+			#the title is course : class (facilitator)
+			#end date is start date + class duration
+			{
+				id: "#{@_id}/#{s.classId}"
+				title: "#{@course().title}: #{s.class().title} (#{s.facilitator().name})"
+				start: moment(s.date)
+				end: moment(s.date).add s.class().duration, 'hours'
+				url: "/bookings/#{@_id}"
+			}
