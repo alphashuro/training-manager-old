@@ -13,7 +13,7 @@ booking-form
 		.field
 			.ui.segment
 				.ui.header
-					h2 Learners Booked ({opts.booking.learners().count()})
+					h2 Learners Booked ({opts.booking.learners().count()} / {opts.booking.course().maxStudents})
 				p(each='{opts.booking.learners().fetch()}')
 					| {name} ({client().name})
 					button.ui.button(onclick='{parent.removeLearner}') Remove
