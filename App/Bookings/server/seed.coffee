@@ -19,7 +19,10 @@ chance.mixin
 
 		sessions = classes.map (c) =>
 			new SessionClass
-				date: chance.date year: 2015, month: 10
+				date: chance.date 
+					year: 2015
+					month: 10
+					hour: _.random 8, 16
 				classId: c._id
 				facilitatorId: facilitatorId
 
