@@ -1,0 +1,32 @@
+bookings-calendar
+	h3 Calendar
+	#calendar
+
+	script(type='coffee').
+		@getMeteorData = ->
+			bookings = Bookings.find().fetch()
+			events = bookings.map (b) -> b.events()
+			result = _.flatten events
+
+			$('#calendar').fullCalendar 'refetchEvents'
+
+			{
+				bookings
+				events: result
+			}
+		@mixin 'RiotMeteorData'
+
+		@on 'mount', ->
+			$('#calendar').fullCalendar
+				weekends: no
+				defaultView: 'agendaWeek'
+				eventSources: [
+					events: @data.events
+				]
+
+					#minTime: "08:00:00"
+					#maxTime: "04:30:00"
+
+		@on 'updated', ->
+			console.log this.calendar
+			# $('#calendar').fullCalendar 'refetchEvents'
