@@ -23,9 +23,9 @@ bookings-calendar
 				eventSources: [
 					events: @data.events
 				]
+				minTime: "08:00"
+				maxTime: "16:30"
 
-					#minTime: "08:00:00"
-					#maxTime: "04:30:00"
 
 		@on 'updated', ->
 			console.log this.calendar
