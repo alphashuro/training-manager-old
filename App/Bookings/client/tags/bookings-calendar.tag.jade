@@ -25,8 +25,18 @@ bookings-calendar
 				]
 				minTime: "08:00"
 				maxTime: "16:30"
+				eventStartEditable: true
+				eventDrop: (event, delta, revert) ->
+					[bookingId, classId] = event.id.split '/'
+					booking = Bookings.findOne bookingId
+					sessions = booking.sessions
+					session = _.findWhere sessions, { classId }
 
 
 		@on 'updated', ->
 			console.log this.calendar
-			# $('#calendar').fullCalendar 'refetchEvents'
+			# $('#calendar').fullCalendar 'refetchEvents'					# something is adding an extra 2 hours to event.start
+					session.set 'date', event.start.toDate()
+					booking.save (error) =>
+						if (error) console.log error
+						else console.log "Saved session: #{session} for booking: #{booking}"
