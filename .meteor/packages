@@ -35,5 +35,6 @@ baysao:riot-layout
 baysao:riot-preprocessor
 baysao:riotjs
 
-babrahams:constellation
 ground:db
+cfs:standard-packages
+cfs:gridfs
