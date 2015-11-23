@@ -73,7 +73,7 @@ booking-form
 			clients: Clients.find().fetch()
 			learners: Learners.find({clientId: @clientId.value}).fetch()
 			facilitators: Facilitators.find().fetch()
-			sessions: Classes.find({courseId: @courseId.value}).fetch().map (c) -> 
+			sessions: Classes.find({courseId: @opts.booking?.courseId}).fetch().map (c) -> 
 				new SessionClass
 					classId: c._id
 
