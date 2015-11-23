@@ -31,3 +31,5 @@ Ground.Collection Bookings
 	methods:
 		learners: -> Learners.find _id: $in: @learnerIds
 		course: -> Courses.findOne @courseId
+		hours: -> @sessions.reduce ((memo, session) -> memo + session.class().duration), 0
+		price: -> @sessions.reduce ((memo, session) -> memo + session.class().price), 0
