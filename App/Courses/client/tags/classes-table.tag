@@ -32,7 +32,7 @@
 					</div>
 				</td>
 				<td>
-					<button class='ui button' type="button">Add</button>
+					<button class='ui button' type="button" onclick='{add}'>Add</button>
 				</td>
 			</tr>
 			<tr each="{data.classes}">
@@ -41,7 +41,7 @@
 				<td>{duration}</td>
 				<td>{price}</td>
 				<td>
-					<button class='ui button'>Delete</button>
+					<button class='ui button' onclick='{parent.delete}'>Delete</button>
 				</td>
 			</tr>
 		</tbody>
@@ -49,8 +49,18 @@
 
 	<script type='coffee'>
 		@getMeteorData = ->
-			classes: this.opts.course.classes().fetch()
-
+			classes: @opts.course?.classes().fetch()
 		@mixin 'RiotMeteorData'
+
+		@delete = (e) -> e.item.remove()
+		@add = ->
+			c = new Class
+				title: @title.value
+				description: @description.value
+				duration: @duration.value
+				price: @price.value
+				courseId: @opts.course._id
+
+			c.save()
 	</script>
 </classes-table>
