@@ -8,10 +8,10 @@ nav-menu
 		a.item(href="/bookings") Bookings
 
 		.ui.simple.dropdown.right.item
-			span
-				|  
+			.text
 				i.circle.icon(class='{ green : data.connected}')
-			| Hi {data.user.profile.name || data.user.emails[0].address}  
+				img.ui.avatar.image(src="http://placehold.it/50x50")
+				| Hi {data.user.profile.name || data.user.emails[0].address}  
 			i.dropdown.icon
 			.menu
 				a.item(href='/profile') Profile
