@@ -1,0 +1,57 @@
+login
+	.ui.middle.center.aligned.grid
+		.column
+			h2.ui.image.header
+				//- img.image
+				.content Login to your account
+			form.ui.large.form(onsubmit="{login}")
+				.ui.stacked.segment
+
+					.field
+						.ui.left.icon.input
+							i.user.icon
+							input( type="text" name="email" placeholder="Email address" )
+
+					.field
+						.ui.left.icon.input
+							i( class="lock icon" )
+							input( type="password" name="password" placeholder="Password" )
+
+				button( class='ui fluid large teal submit button' onclick="{ login }" ) Login
+
+				div( class="ui error message" )
+
+	style( type="stylus" ).
+		body>#riot-root
+			height 100%
+	
+			.grid
+				height 100%
+			  //- display flex
+			  //- justify-content center
+			  //- flex-direction row
+			  //- align-items center
+
+				.column
+					max-width 450px
+	
+	script( type='coffee' ).
+		@login = (e) ->
+			e.preventDefault()
+			Meteor.loginWithPassword @email.value, @password.value, (error) =>
+				if error
+					console.log error
+				else
+					console.log 'Login successful'
+					FlowRouter.go '/'
+
+		@register = ->
+			user =
+				email: @email.value
+				password: @password.value
+
+			Accounts.createUser user, (error) =>
+				if error console.log error
+				else 
+					console.log 'Register successful'
+					FlowRouter.go '/'
