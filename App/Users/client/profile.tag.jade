@@ -1,11 +1,40 @@
 profile-page
 	.ui.center.aligned.header User Profile
-	p Email
-	input
-	p Name
-	input
-	p Photo
-	input(type='file')
-	p Roles
-	ul
-		li(each="{roles}")
+	.ui.segment
+		profile-form(user="{data.user}")
+	
+	script(type="coffee").
+		@getMeteorData = ->
+			user = Meteor.user()
+
+			{ user }
+
+		@mixin 'RiotMeteorData'
+
+profile-form
+	form(onsubmit="{save}")
+		p Email
+			input(value='{opts.user.getFirstEmail()}' disabled)
+
+		p Name
+			input( name='name' value='{opts.user.profile.name}')
+
+		p Photo
+			img.ui.medium.circular.image(alt='Profile Picture')
+			br
+			input(type='file')
+
+		p Roles
+			ul
+				li(each="{ role in opts.user.getRoles() }") { role }
+		
+		button Save
+
+	script(type="coffee").
+		@save = (e) ->
+			e.preventDefault()
+
+			@opts.user.set
+				'profile.name': @name.value
+
+			@opts.user.save()
