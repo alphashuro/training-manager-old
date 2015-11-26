@@ -5,6 +5,7 @@ Ground.Collection Users
 	name: 'UserProfile'
 	fields: {
 		name: 'string'
+		pictureId: 'string'
 	}
 
 @User = Astro.Class
@@ -26,8 +27,12 @@ Ground.Collection Users
 		getRoles: -> Roles.getRolesForUser @_id
 		getFirstEmail: -> @emails[0].address
 		getEmails: -> @emails.map (email) -> email.address
+		getPicture: -> Images.findOne @profile.pictureId
 
 if Meteor.isServer
 	User.extend
 		fields:
 			services: 'object'
+
+@Images = new FS.Collection 'images', 
+	stores: [new FS.Store.GridFS 'images']

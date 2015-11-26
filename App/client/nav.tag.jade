@@ -10,7 +10,10 @@ nav-menu
 		.ui.simple.dropdown.right.item
 			.text
 				i.circle.icon(class='{ green : data.connected}')
-				img.ui.avatar.image(src="http://placehold.it/50x50")
+				img.ui.avatar.image( 
+					src="{ data.user.getPicture() ? data.user.getPicture().url() : 'http://placehold.it/50x50'}"
+					style="height:30px; width:30px;"
+					)
 				| Hi {data.user.profile.name || data.user.emails[0].address}  
 			i.dropdown.icon
 			.menu

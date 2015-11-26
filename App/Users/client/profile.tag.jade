@@ -14,15 +14,15 @@ profile-page
 profile-form
 	form(onsubmit="{save}")
 		p Email
-			input(value='{opts.user.getFirstEmail()}' disabled)
+			input(value='{opts.user.getFirstEmail()}' disabled )
 
 		p Name
-			input( name='name' value='{opts.user.profile.name}')
+			input( name='name' value='{opts.user.profile.name}' )
 
 		p Photo
-			img.ui.medium.circular.image(alt='Profile Picture')
+			img.ui.medium.circular.image( alt='Profile Picture' src='{ opts.user.getPicture().url() }' style='height: 300px; width: 300px;' )
 			br
-			input(type='file')
+			input( name='profilePic' type='file' onchange='{changed}' )
 
 		p Roles
 			ul
@@ -38,3 +38,15 @@ profile-form
 				'profile.name': @name.value
 
 			@opts.user.save()
+
+		@changed = (e) ->
+			switch e.target.name
+				when 'profilePic'
+					profilePic = @profilePic.files[0]
+					Images.insert profilePic, (err, file) =>
+						if err
+							console.log err
+						else
+							Images.remove @opts.user.profile.pictureId
+							@opts.user.set
+								"profile.pictureId": file._id
