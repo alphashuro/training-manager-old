@@ -48,31 +48,25 @@
 		}
 	</style>
 	
-	'use strict';
-	login() {
-		Meteor.loginWithPassword(
-			this.email.value, 
-			this.password.value, error => {
-				if(error) console.log(error);
-				else {
+	<script type='coffee'>
+		@login = (e) ->
+			e.preventDefault()
+			Meteor.loginWithPassword @email.value, @password.value, error =>
+				if error
+					console.log error
+				else
 					console.log('login successful'); 
-					FlowRouter.go('/');
-				}
-		});
-	}
+					FlowRouter.go '/'
 
-	register() {
-		let user = {
-			email: this.email.value,
-			password: this.password.value
-		};
+		@register = ->
+			let user =
+				email: @email.value
+				password: @password.value
 
-		Accounts.createUser(user, error => {
-			if(error) console.log(error);
-			else { 
-				console.log('Register successful');
-				FlowRouter.go('/');
-			}
-		});
-	}
+			Accounts.createUser user, error =>
+				if error console.log error
+				else 
+					console.log('Register successful')
+					FlowRouter.go '/'
+	</script>
 </login>
