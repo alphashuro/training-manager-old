@@ -25,7 +25,7 @@ bookings-calendar
 				]
 				minTime: "08:00"
 				maxTime: "16:30"
-				eventStartEditable: true
+				eventStartEditable: false
 				eventDrop: (event, delta, revert) ->
 					[bookingId, classId] = event.id.split '/'
 					booking = Bookings.findOne bookingId
