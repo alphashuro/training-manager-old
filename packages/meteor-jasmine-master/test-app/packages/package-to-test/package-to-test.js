@@ -1,3 +1,0 @@
-PackageToTest = {
-  foo: 'bar'
-}
