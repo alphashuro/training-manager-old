@@ -9,15 +9,14 @@ class UserService
         console.log 'New user created'
 
   # log user in
-  login: ( email, password ) =>
-    new Promise (resolve, reject) =>
-      Meteor.loginWithPassword email, password, (error) =>
-        if error
-          App.Services.Notification.notify error.message
-          reject error
-        else
-          App.Services.Notification.notify "#{email} is logged in."
-          resolve email
+  login: ( email, password, cb ) =>
+    Meteor.loginWithPassword email, password, (error) =>
+      if error
+        App.Services.Notification.notify error.message
+        cb error
+      else
+        App.Services.Notification.notify "#{email} is logged in."
+        cb null
 
   # create user and login
   createUserAndLogin: ( email, password ) =>
