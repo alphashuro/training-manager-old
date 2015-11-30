@@ -1,0 +1,3 @@
+/* globals PackageToInclude: true */
+
+PackageToInclude = {}
