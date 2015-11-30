@@ -9,7 +9,7 @@ chance.mixin
 
 @createFacilitators = (count = 5) ->
 	_.times count, ->
-		facilitator = new Facilitator chance.facilitator()
+		facilitator = new App.Classes.Facilitator chance.facilitator()
 		facilitator.save()
 
-@resetFacilitators = -> Facilitators.remove({})
+@resetFacilitators = -> App.Classes.Facilitator.remove({})
