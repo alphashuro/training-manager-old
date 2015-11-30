@@ -38,5 +38,7 @@ login
 	script( type='coffee' ).
 		@login = (e) ->
 			e.preventDefault()
-			App.Services.UserClient.login @email.value, @password.value 
-			.then -> FlowRouter.go '/'
+			App.Services.UserClient.login @email.value, @password.value, (error) =>
+				unless error 
+					FlowRouter.go '/'
+			
