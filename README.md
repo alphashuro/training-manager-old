@@ -5,7 +5,7 @@
 ### Training Manager Meteor App ###
 
 * A training company management app
-* 0.3.0
+* 0.4.0
 * [Demo](http://aep-training.meteor.com)
 
 ### How to set it up ###
@@ -19,6 +19,6 @@
 
 ### Who to talk to about this project? ###
 
-* alpha@aepit.co.za 
-* 0164226230 
+* alpha@aepit.co.za
+* 0164226230
 * 0737907955
