@@ -1,4 +1,4 @@
-describe 'Login', ->
+describe 'Login Tag', ->
   div = undefined
 
   # create container and mount login tag before each test
