@@ -5,7 +5,7 @@
 ### Training Manager Meteor App ###
 
 * A training company management app
-* 0.4.0
+* 0.5.0
 * [Demo](http://aep-training.meteor.com)
 
 ### How to set it up ###
