@@ -4,7 +4,7 @@ login
 			h2.ui.image.header
 				//- img.image
 				.content Login to your account
-			form.ui.large.form(onsubmit="{login}")
+			form.ui.large.form.login(onsubmit="{login}")
 				.ui.stacked.segment
 
 					.field
@@ -17,7 +17,7 @@ login
 							i( class="lock icon" )
 							input( type="password" name="password" placeholder="Password" )
 
-				button( class='ui fluid large teal submit button' onclick="{ login }" ) Login
+				button( id='login' class='ui fluid large teal submit button login' onclick="{ login }" ) Login
 
 				div( class="ui error message" )
 
@@ -38,20 +38,5 @@ login
 	script( type='coffee' ).
 		@login = (e) ->
 			e.preventDefault()
-			Meteor.loginWithPassword @email.value, @password.value, (error) =>
-				if error
-					console.log error
-				else
-					console.log 'Login successful'
-					FlowRouter.go '/'
-
-		@register = ->
-			user =
-				email: @email.value
-				password: @password.value
-
-			Accounts.createUser user, (error) =>
-				if error console.log error
-				else 
-					console.log 'Register successful'
-					FlowRouter.go '/'
+			App.Services.UserClient.login @email.value, @password.value 
+			.then -> FlowRouter.go '/'
