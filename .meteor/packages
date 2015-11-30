@@ -44,3 +44,4 @@ cfs:gridfs
 #xolvio:cucumber
 velocity:html-reporter
 sanjo:jasmine
+promise
