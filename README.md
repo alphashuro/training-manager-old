@@ -1,6 +1,6 @@
 # README #
 
-
+[ ![Codeship Status for alphashuro/training-manager](https://codeship.com/projects/a955dd70-7a2b-0133-8cf8-72bb2b768401/status?branch=master)](https://codeship.com/projects/118925)
 
 ### Training Manager Meteor App ###
 
