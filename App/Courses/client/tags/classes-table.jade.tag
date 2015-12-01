@@ -32,15 +32,15 @@ classes-table
           button.ui.button(onclick='{parent.delete}') Delete
   script(type='coffee').
     @getMeteorData = ->
-    	classes: @opts.course?.classes().fetch()
+      classes: @opts.course?.classes().fetch()
     @mixin 'RiotMeteorData'
     @delete = (e) -> e.item.remove()
     @add = ->
-	    c = new Class
-		    title: @title.value
-		    description: @description.value
-		    duration: @duration.value
-		    price: @price.value
-		    courseId: @opts.course._id
-		    
-	    c.save()
+      c = new Class
+        title: @title.value
+        description: @description.value
+        duration: @duration.value
+        price: @price.value
+        courseId: @opts.course._id
+
+      c.save()

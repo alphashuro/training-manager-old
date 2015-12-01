@@ -27,13 +27,13 @@ learners-table
           button.ui.button(onclick='{parent.delete}') Delete
   script(type='coffee').
     @getMeteorData = ->
-    	learners: @opts.client?.learners().fetch()
+      learners: @opts.client?.learners().fetch()
     @mixin 'RiotMeteorData'
     @delete = (e) -> e.item.remove()
     @add = ->
-	    l = new Learner
-		    name: @name.value
-		    phone: @phone.value
-		    email: @email.value
-		    clientId: @opts.client._id
-	    l.save()
+      l = new Learner
+        name: @name.value
+        phone: @phone.value
+        email: @email.value
+        clientId: @opts.client._id
+      l.save()
