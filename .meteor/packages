@@ -33,9 +33,6 @@ momentjs:moment
 semantic:ui-css
 risul:chance
 baysao:riot-meteor-data
-baysao:riot-layout
-baysao:riot-preprocessor
-baysao:riotjs
 
 ground:db
 cfs:standard-packages
@@ -45,3 +42,8 @@ cfs:gridfs
 velocity:html-reporter
 sanjo:jasmine
 promise
+baysao:riotjs
+baysao:riot-layout
+
+
+baysao:riotjs-preprocessor-init
