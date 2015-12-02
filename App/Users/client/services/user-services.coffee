@@ -26,5 +26,11 @@ class UserService
       else
         @loginUser email, password
 
+  makeFacilitator: ( userId ) =>
+    Meteor.call 'make/facilitator', userId, (error, userId) =>
+      if error
+        App.Services.Notification.notify error.message
+      else
+        App.Services.Notification.notify "#{userId} is now a facilitator"
 
 App.Services.UserClient = new UserService()
