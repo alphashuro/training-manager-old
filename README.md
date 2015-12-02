@@ -5,17 +5,19 @@
 ### Training Manager Meteor App ###
 
 * A training company management app
-* 0.5.0
-* [Demo](http://aep-training.meteor.com)
+* 0.6.0
+* [Devel Demo](http://aep-training.meteor.com)
+* [Master Demo](http://107.170.45.163)
 
 ### How to set it up ###
 
-* Install Node.js and Meteor.js
-* `git clone https://alphaaep@bitbucket.org/alphaaep/training-manager-riotjs.git`
-* cd to training-manager-riotjs
-* run `meteor`
-* tests not written yet (I know, I know, but deadlines)
-* to deploy run meteor deploy [subdomain]
+* Install [Meteor](https://meteor.com) - `curl https://install.meteor.com/ | sh`
+* `git clone git@github.com:alphashuro/training-manager.git`
+* `cd training-manager`
+* `meteor run`
+* `meteor run --test` to run tests
+* `meteor deploy` to deploy to meteor's play servers
+* `cd .deploy/staging && mup setup && mup deploy` to deploy to digital ocean server
 
 ### Who to talk to about this project? ###
 
