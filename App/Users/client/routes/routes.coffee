@@ -1,7 +1,9 @@
 FlowRouter.route '/login',
 	name: 'login'
 	action: ->
-		RiotLayout.render 'login'
+		RiotLayout.render 'login', App.API.login
+
+App.API.login.on 'loggedIn', -> FlowRouter.go '/'
 
 Meteor.startup ->
 	Tracker.autorun =>
