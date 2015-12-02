@@ -24,13 +24,9 @@ login
 	style( type="stylus" ).
 		body>#riot-root
 			height 100%
-
+			
 			.grid
 				height 100%
-			  //- display flex
-			  //- justify-content center
-			  //- flex-direction row
-			  //- align-items center
 
 				.column
 					max-width 450px
@@ -38,6 +34,6 @@ login
 	script( type='coffee' ).
 		@login = (e) ->
 			e.preventDefault()
-			App.Services.UserClient.login @email.value, @password.value, (error) =>
-				unless error
-					FlowRouter.go '/'
+			opts.login
+				email: @email.value
+				password: @password.value
