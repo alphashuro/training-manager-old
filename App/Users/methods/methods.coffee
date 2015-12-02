@@ -7,3 +7,8 @@ Meteor.methods
 		Accounts.createUser {email, password, profile}
 	'invite/user': (email, profile) ->
 		console.log('user invites not implemented')
+
+	'make/facilitator': (userId) ->
+		Roles.addUsersToRoles userId, 'facilitator'
+	'unmake/facilitator': (userId) ->
+		Roles.removeUsersFromRoles userId, 'facilitator'
