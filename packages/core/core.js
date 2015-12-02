@@ -1,4 +1,3 @@
-// Write your package code here!
 App = {
   Constants: {},
   // Small reusable utilities
