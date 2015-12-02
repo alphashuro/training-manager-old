@@ -4,7 +4,7 @@ describe 'Login Tag', ->
   # create container and mount login tag before each test
   beforeEach ->
     div = document.createElement 'DIV'
-    Riot.mount div, 'login'
+    Riot.mount div, 'login', App.API.login
 
   it 'Should have input for email and password', ->
     emailInput = $(div).find('input[name=email]')[0]
