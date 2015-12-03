@@ -92,6 +92,7 @@ npm-bcrypt@0.7.8_2
 npm-mongo@1.4.39_1
 observe-sequence@1.0.7
 ordered-dict@1.0.4
+ovcharik:alertify@0.3.11
 package-version-parser@3.0.4
 practicalmeteor:chai@2.1.0_1
 practicalmeteor:loglevel@1.2.0_2
@@ -123,6 +124,7 @@ templating@1.1.5
 templating-tools@1.0.0
 tracker@1.0.9
 training:core@0.0.1
+training:users@0.0.1
 ui@1.0.8
 underscore@1.0.4
 url@1.0.5
