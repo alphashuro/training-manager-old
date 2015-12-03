@@ -2,7 +2,7 @@ profile-page
 	.ui.center.aligned.header User Profile
 	.ui.segment
 		profile-form(user="{data.user}")
-	
+
 	script(type="coffee").
 		@getMeteorData = ->
 			user = Meteor.user()
@@ -27,8 +27,8 @@ profile-form
 		p Roles
 			ul
 				li(each="{ role in opts.user.getRoles() }") { role }
-		
-		button Save
+
+		button.ui.button Save
 
 	script(type="coffee").
 		@save = (e) ->
