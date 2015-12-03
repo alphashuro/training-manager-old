@@ -16,10 +16,26 @@ FlowRouter.route '/profile',
 	name: 'profile'
 	action: ->
 		RiotLayout.render 'layout',
-			main: '<profile-page></profile-page>'
+			main: '<profile-page />'
 
 FlowRouter.route '/settings',
 	name: 'settings'
 	action: ->
 		RiotLayout.render 'layout',
-			main: '<settings-page></settings-page>'
+			main: '<settings-page />'
+
+FlowRouter.route '/users',
+	name: 'users'
+	action: ->
+		RiotLayout.render 'layout',
+			main: '<users-page />'
+
+FlowRouter.route '/users/add',
+	action: ->
+		RiotLayout.render 'layout',
+			main: "<add-user-page />"
+
+FlowRouter.route '/users/:_id',
+	action: (params) ->
+		RiotLayout.render 'layout',
+			main: "<edit-user-page user_id=#{params._id} />"
