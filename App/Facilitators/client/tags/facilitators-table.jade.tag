@@ -14,13 +14,10 @@ facilitators-table
         td
           a.ui.primary.button(href='/facilitators/{_id}') Details
           button.ui.button(onclick='{parent.delete}') Delete
-  script.
-    'use strict';
-    getMeteorData() {
-    return {
-    facilitators: Facilitators.find({}).fetch()
-    }
-    }
-    this.mixin('RiotMeteorData');
+
   script(type='coffee').
+    @getMeteorData = ->
+      facilitators: Facilitator.find({}).fetch()
+    @mixin 'RiotMeteorData'
+    
     @delete = (e) -> e.item.remove()
