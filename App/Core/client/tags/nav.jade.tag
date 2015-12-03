@@ -6,15 +6,16 @@ nav-menu
 		a.item(href="/courses") Courses
 		a.item(href="/clients") Clients
 		a.item(href="/bookings") Bookings
+		a.item(href="/users") Users
 
 		.ui.simple.dropdown.right.item
 			.text
 				i.circle.icon(class='{ green : data.connected}')
-				img.ui.avatar.image( 
+				img.ui.avatar.image(
 					src="{ data.user.getPicture() ? data.user.getPicture().url() : 'http://placehold.it/50x50'}"
 					style="height:30px; width:30px;"
 					)
-				| Hi {data.user.profile.name || data.user.emails[0].address}  
+				| Hi {data.user.profile.name || data.user.emails[0].address}
 			i.dropdown.icon
 			.menu
 				a.item(href='/profile') Profile
