@@ -19,23 +19,19 @@ App.Classes.UserProfile = UserProfile
 	name: "User"
 	collection: App.Collections.Users
 	fields:
-		createdAt: 'date'
-		default: -> new Date()
+		createdAt:
+			type: 'date'
+			default: -> new Date()
 		emails:
 			type: 'array'
 			default: -> []
 		profile:
 			type: 'object'
-			nested: 'UserProfile'
 			default: -> {}
 		roles:
 			type: 'array'
 			nested: 'string'
 			default: -> []
-	events:
-		beforeSave: (e) ->
-			console.log e.target
-			e.preventDefault()
 	methods:
 		getRoles: -> @roles
 		getFirstEmail: -> @emails[0].address
