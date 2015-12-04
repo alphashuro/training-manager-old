@@ -5,5 +5,5 @@ edit-facilitator-page
 
 	script( type='coffee' ).
 		@getMeteorData = ->
-			facilitator: Facilitator.findOne @opts.facilitator_id
+			facilitator: App.API.facilitators.get @opts.facilitator_id
 		@mixin 'RiotMeteorData'
