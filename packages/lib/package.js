@@ -12,7 +12,42 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.versionsFrom('1.2.1');
-  api.use('ecmascript');
+  packages = {
+    client: [
+      'ovcharik:alertify@0.3.11'
+    ],
+    server: [],
+    both: [
+      'ecmascript', 
+      'coffeescript', 
+      'ground:db@0.3.14', 
+      'jagi:astronomy@1.2.4', 
+      'cfs:standard-packages@0.5.9', 
+      'cfs:gridfs@0.0.33',
+      'accounts-password@1.1.4',
+      'alanning:roles@1.2.14',
+      'promise@0.5.1',
+      
+      'velocity:html-reporter@0.9.1',
+      'sanjo:jasmine@0.20.3',
+
+      'mongo@1.1.3',
+      'meteor-base@1.0.1',
+      'tracker@1.0.9',
+      'es5-shim@4.1.14',
+
+      'autopublish@1.0.4',
+      'insecure@1.0.4'
+    ]
+  };
+  api.use(packages.both);
+  api.use(packages.server, 'server');
+  api.use(packages.client, 'client');
+
+  api.imply(packages.both);
+  api.imply(packages.server, 'server');
+  api.imply(packages.client, 'client');
+
   api.addFiles('lib.js');
 });
 

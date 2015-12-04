@@ -124,6 +124,7 @@ templating@1.1.5
 templating-tools@1.0.0
 tracker@1.0.9
 training:core@0.0.1
+training:lib@0.0.1
 training:users@0.0.1
 ui@1.0.8
 underscore@1.0.4

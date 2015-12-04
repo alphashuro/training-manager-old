@@ -12,8 +12,8 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.versionsFrom('1.2.1');
-  api.use('ecmascript');
-  api.addFiles('core.js');
+  api.use(['training:lib', 'training:users']);
+  // api.addFiles('core.js');
 });
 
 Package.onTest(function(api) {
