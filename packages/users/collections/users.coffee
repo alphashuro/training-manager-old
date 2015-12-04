@@ -2,6 +2,11 @@
 Ground.Collection Users
 App.Collections.Users = Users
 
+Users.allow
+	insert: -> true
+	update: -> true
+	remove: -> true
+
 @UserProfile = Astro.Class
 	name: 'UserProfile'
 	fields: {
@@ -26,6 +31,11 @@ App.Classes.UserProfile = UserProfile
 		roles:
 			type: 'array'
 			nested: 'string'
+			default: -> []
+	events:
+		beforeSave: (e) ->
+			console.log e.target
+			e.preventDefault()
 	methods:
 		getRoles: -> @roles
 		getFirstEmail: -> @emails[0].address
@@ -42,7 +52,7 @@ App.Classes.UserProfile = UserProfile
 			Meteor.call 'make/role', @_id, role, (error) =>
 				if error then console.log error
 		# remove user from a role
-		unmake: (role) -> 
+		unmake: (role) ->
 			Meteor.call 'unmake/role', @_id, role, (error) =>
 				if error then console.log error
 		# check if user belongs to a role
