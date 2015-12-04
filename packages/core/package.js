@@ -12,7 +12,7 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.versionsFrom('1.2.1');
-  api.use(['training:lib', 'training:users']);
+  api.use(['training:lib', 'training:users', 'training:facilitators']);
   // api.addFiles('core.js');
 });
 
@@ -20,5 +20,5 @@ Package.onTest(function(api) {
   api.use('ecmascript');
   api.use('tinytest');
   api.use('training:core');
-  api.addFiles('core-tests.js');
+  // api.addFiles('core-tests.js');
 });
