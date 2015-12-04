@@ -15,11 +15,12 @@ describe 'Login Page', ->
   #   Meteor.users.remove user._id
 
   beforeEach ->
-    FlowRouter.go 'login'
-
-  it 'Should be on /login route', ->
-    currentPath = FlowRouter.current().path
-    expect(currentPath).toEqual '/login'
+		Meteor.logout()
+    FlowRouter.go '/login'
+	# 
+  # it 'Should be on /login route', ->
+  #   currentPath = FlowRouter.current().path
+  #   expect(currentPath).toEqual '/login'
 
   it 'Should have login tag', ->
     loginTag = $('[riot-tag=login]')[0]
