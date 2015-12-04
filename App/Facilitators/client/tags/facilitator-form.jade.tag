@@ -3,31 +3,36 @@ facilitator-form
 
 		.field
 			label Name
-			input(type="text" name="name" placeholder="Name" value='{opts.facilitator.name}')
+			input(type="text" name="name" placeholder="Name" value='{opts.facilitator.get("profile.name")}')
 
 		.field
 			label Email
-			input(type="text" name="email" placeholder="Email" value='{opts.facilitator.email}')
+			input(type="text" name="email" placeholder="Email" value='{opts.facilitator.getFirstEmail()}')
 
 		.field
 			label Phone
-			input(type="text" name="phone" placeholder="Phone" value='{opts.facilitator.phone}')
+			input(type="text" name="phone" placeholder="Phone" value='{opts.facilitator.get("profile.phone")}' )
 
 		button.ui.button Save
 
 	script(type='coffee').
 		@on 'mount', ->
-			unless @opts.facilitator
-				@opts.facilitator = new Facilitator()
-
+			if opts.facilitator
+				@email.disabled = true
+				
 		@save = (e) ->
 			e.preventDefault()
-			
-			@opts.facilitator.set
+			profile = 
 				name: @name.value
-				email: @email.value
 				phone: @phone.value
+			
+			if !opts.facilitator
+				email = @email.value
+			
+				Meteor.call 'create/facilitator', email, profile
 
-			@opts.facilitator.save (error) ->
-				if error then console.log error
-				else console.log 'Facilitator saved'
+			else 
+				@opts.facilitator.set 'profile', profile 
+				@opts.facilitator.save (error) ->
+					if error then console.log error
+					else console.log 'Facilitator saved'
