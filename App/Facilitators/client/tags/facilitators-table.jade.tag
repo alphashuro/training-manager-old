@@ -17,7 +17,7 @@ facilitators-table
 
   script(type='coffee').
     @getMeteorData = ->
-      facilitators: Facilitator.find({}).fetch()
+      facilitators: Facilitator.find().fetch()
     @mixin 'RiotMeteorData'
     
     @delete = (e) -> e.item.remove()
