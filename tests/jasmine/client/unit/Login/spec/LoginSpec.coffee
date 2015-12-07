@@ -15,7 +15,6 @@ describe 'Login Tag', ->
 
   it 'Should have login button', ->
     loginButton = $(div).find('button#login')[0]
-
     expect(loginButton).toBeDefined()
 
   it 'Should call user login service when login button is clicked', ->
