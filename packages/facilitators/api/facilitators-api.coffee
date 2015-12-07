@@ -8,11 +8,13 @@ class FacilitatorsAPI
 		App.Collections.Users.findOne id,
 			transform: (doc) ->
 				new Facilitator doc
-	create: (doc) ->
+	create: (doc, cb) ->
 		Meteor.call 'create/facilitator', doc, (error) ->
 			if error then console.log error
-	update: (id, doc) ->
+			cb?(error)
+	update: (id, doc, cb) ->
 		Meteor.call 'update/facilitator', id, doc, (error) ->
 			if error then console.log error
+			cb?(error)
 
 App.API.facilitators = @API = new FacilitatorsAPI()
