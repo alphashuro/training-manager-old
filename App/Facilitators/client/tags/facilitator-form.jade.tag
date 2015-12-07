@@ -22,17 +22,14 @@ facilitator-form
 				
 		@save = (e) ->
 			e.preventDefault()
-			profile = 
+
+			doc =
+				email: @email.value
 				name: @name.value
 				phone: @phone.value
 			
-			if !opts.facilitator
-				email = @email.value
-			
-				Meteor.call 'create/facilitator', email, profile
+			if !opts.facilitator			
+				App.API.facilitators.create doc
 
 			else 
-				@opts.facilitator.set 'profile', profile 
-				@opts.facilitator.save (error) ->
-					if error then console.log error
-					else console.log 'Facilitator saved'
+				App.API.facilitators.update doc
