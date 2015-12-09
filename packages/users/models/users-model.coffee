@@ -24,14 +24,12 @@ App.Classes.UserProfile = UserProfile
 			default: -> new Date()
 		emails:
 			type: 'array'
-			default: -> []
 		profile:
 			type: 'object'
 			default: -> {}
 		roles:
 			type: 'array'
 			nested: 'string'
-			default: -> []
 	methods:
 		getRoles: -> @roles
 		getFirstEmail: -> @emails[0].address
