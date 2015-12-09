@@ -1,4 +1,4 @@
-describe 'Add User Form Tag', ->
+describe 'Add User Form', ->
 	div = undefined
 
 	beforeEach ->
@@ -38,4 +38,4 @@ describe 'Add User Form Tag', ->
 			email : 'user@domain.com'
 			name : 'Test User'
 			password : 'password'
-		}, []
+		}, [], jasmine.any Function
