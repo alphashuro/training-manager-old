@@ -8,11 +8,11 @@ Ground.Collection App.Collections.Facilitators
 		profile:
 			type: 'object'
 	methods:
-		inviteUser: ->
+		invite: ->
 			profile =
 				name : @name
 				phone : @phone
-			Meteor.call 'invite/user', @email, (error) ->
+			Meteor.call 'users/invite/user', @email, (error) ->
 				App.Utils.notify 'User invited', error
 
 App.Classes.Facilitator = Facilitator
