@@ -6,17 +6,13 @@ class UsersAPI
 			password,
 			{	name },
 			roles,
-			(error) ->
-				cb? error
+			cb
 	remove: (id, cb) ->
-		Meteor.call 'users/remove/user', id, (error) =>
-			cb? error
+		Meteor.call 'users/remove/user', id, cb
 	addRole: (id, role, cb) ->
-		Meteor.call 'users/add/role', id, role, (error) =>
-			cb? error
+		Meteor.call 'users/add/role', id, role, cb
 	removeRole: (id, role, cb) ->
-		Meteor.call 'users/remove/role', id, role, (error) =>
-			cb? error
+		Meteor.call 'users/remove/role', id, role, cb
 	update: (id, doc, cb) ->
 	get: (id) ->
 		App.Collections.Users.findOne id
@@ -27,6 +23,6 @@ class UsersAPI
 		App.Collections.Users.find filter
 
 	invite: (id, cb) ->
-		Meteor.call 'users/invite/user', id, (error) => cb? error
+		Meteor.call 'users/invite/user', id, cb
 
 App.API.users = new UsersAPI()
