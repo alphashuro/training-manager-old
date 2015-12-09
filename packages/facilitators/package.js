@@ -23,26 +23,29 @@ Package.onUse(function(api) {
 	}
 
 	var files = {
-		client: [],
-		server: [],
+		client: [
+
+		],
+		server: [
+			'methods/facilitator-methods.coffee'
+		],
 		shared: [
 			'api/facilitators-api.coffee',
-			'models/facilitators-model.coffee'
+			'models/facilitators-model.coffee',
 		]
 	}
 
   api.use(packages.shared);
-  api.use(packages.client, 'client');
   api.use(packages.server, 'server');
+  api.use(packages.client, 'client');
 
   api.addFiles(files.shared);
-  api.addFiles(files.client, 'client');
   api.addFiles(files.server, 'server');
+  api.addFiles(files.client, 'client');
 });
 
 Package.onTest(function(api) {
-  api.use(['ecmascript', 'coffeescript']);
-  api.use('tinytest');
+  api.use(['ecmascript', 'coffeescript', 'tinytest']);
   api.use('training:facilitators');
   api.addFiles('tests/facilitators-tests.coffee');
 });
