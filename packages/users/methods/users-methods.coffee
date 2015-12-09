@@ -27,7 +27,7 @@ Meteor.methods
 
 	'users/remove/user': (id) ->
 		user = App.Collections.Users.findOne id
-		unless user.roles.length > 0
+		unless user.roles?.length > 0
 			App.Collections.Users.remove id
 		else
 			throw new Meteor.Error 'A user cannot be deleted while there is a role asigned to them'
