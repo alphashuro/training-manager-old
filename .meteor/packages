@@ -38,8 +38,8 @@ ground:db
 cfs:standard-packages
 cfs:gridfs
 
-#xolvio:cucumber
 velocity:html-reporter
+velocity:console-reporter
 sanjo:jasmine
 xolvio:cucumber
 
