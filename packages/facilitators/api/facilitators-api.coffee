@@ -12,31 +12,22 @@ class FacilitatorsAPI
 			transform: (doc) ->
 				new Facilitator doc
 	create: (doc, cb) ->
-		{ email, name, phone } = doc
-		Meteor.call 'create/user',
+		{ email, name, phone, password } = doc
+		Meteor.call 'users/create/user',
 		email,
-		no ,
+		password ,
 		{
 			name
 			phone
 		},
-		'facilitator',	(error) ->
-			if error then throw error
-		# Meteor.call 'create/facilitator', doc, (error) ->
-		# 	if error then console.log error
-		# 	cb? error
+		'facilitator', cb
+
 	update: (id, doc, cb) ->
 		f = App.Collections.Users.findOne id
 		f.set doc, cb
-		# Meteor.call 'update/facilitator', id, doc, (error) ->
-		# 	if error then console.log error
-		# 	cb? error
+
 	remove: (id, cb) ->
 		f = App.Collections.Users.findOne id
-		f.remove()
-		# Meteor.call 'remove/facilitator', id, (error) ->
-		# 	if error
-		# 		App.Utils.notify 'Facilitator Removed', error
-		# 	cb? error
+		f.remove(cb)
 
 App.API.facilitators = @API = new FacilitatorsAPI()
