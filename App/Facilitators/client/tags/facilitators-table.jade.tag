@@ -20,4 +20,4 @@ facilitators-table
 			facilitators : App.API.facilitators.getAll().fetch()
 		@mixin 'RiotMeteorData'
 
-		@delete = (e) -> e.item.remove()
+		@delete = (e) -> App.API.facilitators.remove e.item_id
