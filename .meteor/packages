@@ -41,6 +41,8 @@ cfs:gridfs
 #xolvio:cucumber
 velocity:html-reporter
 sanjo:jasmine
+xolvio:cucumber
+
 promise
 baysao:riotjs
 baysao:riot-layout
