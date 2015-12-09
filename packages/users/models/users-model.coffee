@@ -24,12 +24,14 @@ App.Classes.UserProfile = UserProfile
 			default: -> new Date()
 		emails:
 			type: 'array'
+			default: -> []
 		profile:
 			type: 'object'
 			default: -> {}
 		roles:
 			type: 'array'
 			nested: 'string'
+			default: -> []
 	methods:
 		getRoles: -> @roles
 		getFirstEmail: -> @emails[0].address
@@ -38,16 +40,16 @@ App.Classes.UserProfile = UserProfile
 		getName: -> @profile.name
 
 		# invite user to set up their account via email
-		invite: -> Meteor.call 'invite/user', @_id, (error) =>
+		invite: -> Meteor.call 'users/invite/user', @_id, (error) =>
 			if error then console.log error
 
 		# add a role to a user
 		make: (role) ->
-			Meteor.call 'make/role', @_id, role, (error) =>
+			Meteor.call 'users/make/role', @_id, role, (error) =>
 				if error then console.log error
 		# remove user from a role
 		unmake: (role) ->
-			Meteor.call 'unmake/role', @_id, role, (error) =>
+			Meteor.call 'users/unmake/role', @_id, role, (error) =>
 				if error then console.log error
 		# check if user belongs to a role
 		'is': (role) ->
