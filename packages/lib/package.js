@@ -18,8 +18,16 @@ Package.onUse(function(api) {
     ],
     server: [],
     both: [
+			// core packages
+      'mongo@1.1.3',
+      'meteor-base@1.0.1',
+      'tracker@1.0.9',
+      'es5-shim@4.1.14',
+
+			// compilers and parsers for nicer looking and easier to write code
       'ecmascript',
-      'coffeescript',
+      'coffeescript@1.0.11',
+
       'ground:db@0.3.14',
       'jagi:astronomy@1.2.4',
       'cfs:standard-packages@0.5.9',
@@ -29,14 +37,14 @@ Package.onUse(function(api) {
       'promise@0.5.1',
 			'kadira:flow-router@2.10.0',
 
+			// testing
       'velocity:html-reporter@0.9.1',
       'sanjo:jasmine@0.20.3',
+			'velocity:helpers@0.5.0',
+			'xolvio:cucumber@0.20.3_1',
+			'velocity:console-reporter@0.1.4',
 
-      'mongo@1.1.3',
-      'meteor-base@1.0.1',
-      'tracker@1.0.9',
-      'es5-shim@4.1.14',
-
+			// auxilliary (to be removed)
       'autopublish@1.0.4',
       'insecure@1.0.4'
     ]
