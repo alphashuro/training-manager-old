@@ -15,7 +15,25 @@ Package.onUse(function(api) {
   api.use([
     'training:lib'
     ]);
-  api.addFiles('collections/users.coffee');
+
+	var files = {
+		both: [
+			'models/users-model.coffee',
+			'api/users-api.coffee'
+		],
+		server: [
+      'methods/users-methods.coffee',
+			'publications/publish-users.coffee'
+		],
+		client: [
+
+		]
+	};
+
+	api.addFiles(files.both);
+	api.addFiles(files.server, 'server');
+	api.addFiles(files.client, 'client')
+  api.addFiles();
 });
 
 Package.onTest(function(api) {
