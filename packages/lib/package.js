@@ -18,16 +18,17 @@ Package.onUse(function(api) {
     ],
     server: [],
     both: [
-      'ecmascript', 
-      'coffeescript', 
-      'ground:db@0.3.14', 
-      'jagi:astronomy@1.2.4', 
-      'cfs:standard-packages@0.5.9', 
+      'ecmascript',
+      'coffeescript',
+      'ground:db@0.3.14',
+      'jagi:astronomy@1.2.4',
+      'cfs:standard-packages@0.5.9',
       'cfs:gridfs@0.0.33',
       'accounts-password@1.1.4',
       'alanning:roles@1.2.14',
       'promise@0.5.1',
-      
+			'kadira:flow-router@2.10.0',
+
       'velocity:html-reporter@0.9.1',
       'sanjo:jasmine@0.20.3',
 
