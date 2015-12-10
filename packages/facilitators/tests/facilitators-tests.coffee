@@ -1,7 +1,7 @@
 Tinytest.add 'Facilitator API exists', (test) ->
 	test.isNotUndefined App.API.facilitators
 
-Tinytest.add 'FacilitatorsAPI.getAll', sinon.test (test) ->
+Tinytest.add 'FacilitatorsAPI.getAll', (test) ->
 	App.Collections.Users =
 		find: (filter, options) ->
 			test.equal filter, { roles: $in: [ 'facilitator' ] }

@@ -11,20 +11,12 @@ class FacilitatorsAPI
 		App.Collections.Users.findOne id,
 			transform: (doc) ->
 				new Facilitator doc
-	create: (doc, cb) ->
-		{ email, name, phone, password } = doc
-		Meteor.call 'users/create/user',
-		email,
-		password ,
-		{
-			name
-			phone
-		},
-		'facilitator', cb
+	create: ({ email, name, phone, password }, cb) ->
+		Meteor.call 'users/create/user', email, password, { name, phone }, 'facilitator', cb
 
-	update: (id, doc, cb) ->
+	update: (id, { name, phone }, cb) ->
 		f = App.Collections.Users.findOne id
-		f.set doc, cb
+		f.set { name, phone }, cb
 
 	remove: (id, cb) ->
 		f = App.Collections.Users.findOne id

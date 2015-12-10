@@ -1,6 +1,5 @@
 Meteor.methods
-	'create/facilitator': (doc) ->
-		{ email, name, phone } = doc
+	'create/facilitator': ({ email, name, phone }) ->
 		Meteor.call 'users/create/user',
 		email,
 		no ,

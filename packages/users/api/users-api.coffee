@@ -1,6 +1,5 @@
 class UsersAPI
-	create: (doc, roles, cb) ->
-		{email, password, name} = doc
+	create: ({email, password, name}, roles, cb) ->
 		Meteor.call 'users/create/user',
 			email,
 			password,

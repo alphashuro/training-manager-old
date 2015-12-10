@@ -6,19 +6,17 @@ Meteor.methods
 
 		if password
 			# password was given
-
 			userId = Accounts.createUser {
-				email : email
-				password : password
-				profile : profile
+				email
+				password
+				profile
 			}
 
 		else
 			# password isnt given, create the user and send invitation email
-
 			userId = Accounts.createUser {
-				email: email
-				profile: profile
+				email
+				profile
 			}
 
 			Accounts.sendEnrollmentEmail userId
